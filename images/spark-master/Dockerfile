@@ -1,0 +1,3 @@
+FROM spark-base
+
+EXPOSE 7077 8080
