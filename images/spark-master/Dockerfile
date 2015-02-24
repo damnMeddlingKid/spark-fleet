@@ -1,4 +1,4 @@
-FROM spark-base
+FROM quadrature/spark-base
 
 EXPOSE 7077 8080
 
