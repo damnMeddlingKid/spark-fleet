@@ -1,10 +1,22 @@
 #!/bin/bash
-env
-source /root/spark_files/configure_spark.sh
+#env
+
+source /root/spark_config/configure-spark.sh
+
 IP=$(ip -o -4 addr list eth0 | perl -n -e 'if (m{inet\s([\d\.]+)\/\d+\s}xms) { print $1 }')
 
 export MASTER = $IP
 
-#TODO : START THE SPARK MASTER
+etcdctl set /spark/master $IP
 
+configure_spark
 
+/opt/spark-1.0.0/sbin/start-master.sh
+
+echo "SPARK MASTER STARTED ON spark://$MASTER:7077"
+
+while [ 1 ];
+do
+tail -f /opt/spark-${SPARK_VERSION}/logs/*.out
+sleep 1
+done

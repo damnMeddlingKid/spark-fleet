@@ -9,4 +9,4 @@ RUN (cd /opt) && (wget -q -0- http://d3kbcqa49mib13.cloudfront.net/spark-$SPARK_
 RUN ln -s /opt/spark-$SPARK_VERSION-bin-hadoop2 /opt/spark-$SPARK_VERSION
 RUN mkdir -p /tmp/spark
 
-COPY files /root/spark_config
+COPY files /root/spark-config
