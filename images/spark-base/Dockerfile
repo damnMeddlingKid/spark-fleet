@@ -1,4 +1,4 @@
-FROM ubuntu:14.10
+FROM ubuntu:precise
 
 ENV SPARK_VERSION 1.1.0
 ENV SPARK_HOME /opt/spark-$SPARK_VERSION
