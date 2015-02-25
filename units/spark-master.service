@@ -1,0 +1,8 @@
+[Unit] 
+description=Spark master service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill spark-master
+ExecStartPre=-/usr/bin/docker rm spark-master
+ExecStart=/usr/bin/docker run --rm --name spark-master quadrature/spark-master
+ExecStop=/usr/bin/docker stop spark-master
