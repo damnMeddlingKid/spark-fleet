@@ -1,4 +1,4 @@
-FROM quadrature/spark-base
+FROM quadrature/spark-base:latest
 
 EXPOSE 7077 8080
 
