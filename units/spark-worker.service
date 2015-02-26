@@ -1,0 +1,12 @@
+[Unit] 
+Description=Spark master service
+After=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill spark-worker
+ExecStartPre=-/usr/bin/docker rm spark-worker
+ExecStart=/usr/bin/sh "echo $(docker run --rm --name -e MASTER='etcdctl get /spark/master' spark-worker quadrature/spark-worker)"
+ExecStop=/usr/bin/docker stop spark-worker
+
+[X-Fleet]
+Global=true
