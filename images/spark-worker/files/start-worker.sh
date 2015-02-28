@@ -9,7 +9,7 @@ export WORKER=$IP
 
 configure_spark
 
-${SPARK_HOMEn}/bin/start-worker.sh
+${SPARK_HOME}/bin/start-worker.sh
 
 echo "SPARK WORKER STARTED ON spark://$WORKER:8888"
 
