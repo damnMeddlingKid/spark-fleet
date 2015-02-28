@@ -1,6 +1,8 @@
 [Unit] 
-Description=Spark master service
+Description=Spark worker service
 After=docker.service
+After=master.service
+Requires=docker.service
 
 [Service]
 ExecStartPre=-/usr/bin/docker kill spark-worker
