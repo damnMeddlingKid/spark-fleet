@@ -7,8 +7,6 @@ IP=$(ip -o -4 addr list eth0 | perl -n -e 'if (m{inet\s([\d\.]+)\/\d+\s}xms) { p
 
 export MASTER=$IP
 
-/bin/etcdctl set /spark/master $IP
-
 configure_spark
 
 /opt/spark-1.1.0/sbin/start-master.sh

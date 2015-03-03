@@ -7,6 +7,8 @@ WORKER=$(ip -o -4 addr list eth0 | perl -n -e 'if (m{inet\s([\d\.]+)\/\d+\s}xms)
 
 export WORKER=$IP
 
+echo $SPARK_HOME
+
 configure_spark
 
 . ${SPARK_HOME}/conf/spark-env.sh
@@ -14,10 +16,4 @@ configure_spark
 ${SPARK_HOME}/bin/spark-class org.apache.spark.deploy.worker.Worker spark://$MASTER:$SPARK_MASTER_PORT
 
 echo "SPARK WORKER STARTED ON spark://$WORKER:8888"
-
-while true;
-do 
-	tail -f ${SPARK_HOME}/logs/*.out
-	sleep 1
-done
 
