@@ -3,7 +3,6 @@ FROM debian:8.0
 ENV SPARK_VERSION 1.1.0
 ENV SPARK_HOME /opt/spark-$SPARK_VERSION
 ENV PATH $SPARK_HOME:$PATH
-ENV SPARK_MASTER_PORT 7077
 
 RUN apt-get update && apt-get install -y \
 	less openjdk-7-jre-headless \
