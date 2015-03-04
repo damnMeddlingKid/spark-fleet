@@ -1,0 +1,10 @@
+[Unit]
+Description=DNS used to resolve docker addresses to machine addressses
+After=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker kill dns-server
+ExecStartPre=-/usr/bin/docker rm dns-server
+ExecStartPre=-/usr/bin/docker pull amplab/dnsmasq-precise
+ExecStartPre=-/usr/bin/etcdctl set /dns-server %H
+ExecStart=/usr/bin/docker run

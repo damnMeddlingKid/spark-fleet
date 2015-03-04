@@ -7,7 +7,7 @@ Requires=docker.service
 ExecStartPre=-/usr/bin/docker kill spark-worker
 ExecStartPre=-/usr/bin/docker rm spark-worker
 ExecStartPre=-/usr/bin/docker pull quadrature/spark-worker
-ExecStart=/usr/bin/sh -c "echo $(docker run --rm --name spark-worker -p 7077:7077 -e MASTER='etcdctl get /spark/master quadrature/spark-worker)"
+ExecStart=/usr/bin/sh -c 'docker run --name spark-worker -p 8888:8888 -e MASTER=$(/usr/bin/etcdctl get /spark/master) quadrature/spark-worker'
 ExecStop=/usr/bin/docker stop spark-worker
 
 [X-Fleet]

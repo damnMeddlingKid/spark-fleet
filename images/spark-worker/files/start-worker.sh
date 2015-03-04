@@ -16,7 +16,7 @@ configure_spark
 
 . ${SPARK_HOME}/conf/spark-env.sh
 
-${SPARK_HOME}/bin/spark-class org.apache.spark.deploy.worker.Worker spark://$MASTER:$SPARK_MASTER_PORT
+${SPARK_HOME}/bin/spark-class org.apache.spark.deploy.worker.Worker $MASTER
 
-echo "SPARK WORKER STARTED ON spark://$WORKER:8888"
+echo  "SPARK WORKER STARTED ON spark://$WORKER:8888"
 
