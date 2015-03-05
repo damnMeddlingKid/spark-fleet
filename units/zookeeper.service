@@ -1,0 +1,27 @@
+[Unit]
+Description=ex-zk%m
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=Simple
+TimeoutStartSec=0
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill ex-zk%m
+ExecStartPre=-/usr/bin/docker rm ex-zk%m
+ExecStartPre=/usr/bin/docker pull thefactory/zookeeper-exhibitor:latest
+ExecStart=/usr/bin/sh -c "docker run --name ez-zk%m \
+                          -p 8181:8181 \
+                          -p 2181:2181 \
+                          -p 2888:2888 \
+                          -p 3888:3888 \
+                          -e S3_BUCKET=$(/usr/bin/etcdctl get /AWS/bucket) \
+                          -e S3_PREFIX=$(/usr/bin/etcdctl get /AWS/prefix) \
+                          -e AWS_ACCESS_KEY_ID=$(/usr/bin/etcdctl get /AWS/keyId) \
+                          -e AWS_SECRET_ACCESS_KEY=$(/usr/bin/etcdctl get /AWS/accessKey) \
+                          -e HOSTNAME=ez-zk%m \
+                          thefactory/zookeeper-exhibitor:latest"
+ExecStop=/usr/bin/docker stop ex-zk%m
+
+[X-Fleet]
+Global=true
