@@ -11,5 +11,6 @@ ExecStartPre=-/usr/bin/docker kill spark-master
 ExecStartPre=-/usr/bin/docker rm spark-master
 ExecStartPre=-/usr/bin/docker pull quadrature/spark-master
 ExecStartPre=-/usr/bin/etcdctl set /hdfs/master %H
-ExecStart=/usr/bin/docker run --volumes-from hdfs --net host -p 50070:50070 -p 8020:8020 -p 9000:9000 -e MASTER=%H --rm --name hdfs quadrature/hdfs /bin/bash -c 'cat > /root/hadoop-config/slaves' < slaves
+ExecStartPre=-/usr/bin/docker run --volumes-from hdfs --net host -p 50070:50070 -p 8020:8020 -p 9000:9000 -e MASTER=%H --rm --name hdfs quadrature/hdfs /bin/bash -c 'cat > /root/hadoop-config/slaves' < slaves
+ExceStartPre=-/usr/bin/docker exec hdfs /root/hadoop-config/setup-hadoop.sh
 ExecStop=/usr/bin/docker stop spark-master

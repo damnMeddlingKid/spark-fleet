@@ -19,4 +19,4 @@ RUN ln -s /hdfs/hadoop-2.6.0 /hdfs/hadoop
 
 ADD files /root/hadoop-config
 
-CMD /root/hadoop-config/setup-hadoop.sh
+RUN chmod a+x /root/hadoop-config/setup-hadoop.sh
