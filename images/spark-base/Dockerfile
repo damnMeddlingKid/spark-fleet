@@ -1,4 +1,4 @@
-FROM hdfs:latest
+FROM debian:8.0
 
 ENV SPARK_VERSION 1.1.0
 ENV SPARK_HOME /opt/spark-$SPARK_VERSION
