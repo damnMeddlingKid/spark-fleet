@@ -1,8 +1,8 @@
-spark_dirs=$(ls -d spark-*)
+spark_dirs=$(ls -d */)
 
 for i in $spark_dirs 
 do
-	echo "building $i"
+	echo "====================building $i============================"
 	cd $i
 	./build.sh
 	cd ..

@@ -1,5 +1,5 @@
 [Unit] 
-Description=spark master service
+Description=hdfs master service
 After=docker.service
 Before=spark-master.service
 Requires=docker.service
@@ -7,10 +7,11 @@ Requires=docker.service
 [Service]
 ExecStartPre=-/usr/bin/rm -rf slaves
 ExecStartPre=-/usr/bin/fleetctl list-machines| awk '{ if(NR>1)print $2; }' >> slaves
-ExecStartPre=-/usr/bin/docker kill spark-master
-ExecStartPre=-/usr/bin/docker rm spark-master
-ExecStartPre=-/usr/bin/docker pull quadrature/spark-master
+ExecStartPre=-/usr/bin/docker kill hdfs-master
+ExecStartPre=-/usr/bin/docker rm hdfs-master
+ExecStartPre=-/usr/bin/docker pull quadrature/hdfs
 ExecStartPre=-/usr/bin/etcdctl set /hdfs/master %H
-ExecStartPre=-/usr/bin/docker run --volumes-from hdfs --net host -p 50070:50070 -p 8020:8020 -p 9000:9000 -e MASTER=%H --rm --name hdfs quadrature/hdfs /bin/bash -c 'cat > /root/hadoop-config/slaves' < slaves
-ExceStartPre=-/usr/bin/docker exec hdfs /root/hadoop-config/setup-hadoop.sh
-ExecStop=/usr/bin/docker stop spark-master
+ExecStartPre=-/usr/bin/docker run --volumes-from hdfs --net host -p 50070:50070 -p 8020:8020 -p 9000:9000 -e MASTER=%H --rm --name hdfs-master quadrature/hdfs /bin/bash -c 'cat > /root/hadoop-config/slaves' < slaves
+ExecStart=/usr/bin/docker exec hdfs-master /root/hadoop-config/setup-hadoop-master.sh
+ExecStoPre=-/usr/bin/docker exec hdfs-master /hdfs/hadoop/bin/stop-dfs.sh
+ExecStop=/usr/bin/docker stop hdfs-master
