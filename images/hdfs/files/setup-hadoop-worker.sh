@@ -19,5 +19,5 @@ chmod go-wx /root/.ssh/authorized_keys
 #hadoop namenode -format
 #}
 
-
+while true; do sleep 1000; done
 

@@ -6,5 +6,5 @@
      <property>
 	 <name>dfs.datanode.data.dir</name>
 	 <value>/hdfs-data</value>
-     <property>
+     </property>
 </configuration>
