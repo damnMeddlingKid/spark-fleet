@@ -1,13 +1,15 @@
-FROM debian:8.0
+FROM ubuntu:precise
 
 RUN apt-get update && apt-get install -y \
 	less openjdk-7-jre-headless \
 	wget \ 
 	sudo \
-	openssh-server
+	openssh-server \
+	openssh-client
 
 ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
 ENV HADOOP_HOME=/hdfs/hadoop
+ENV HADOOP_CONF_DIR=/hdfs/hadoop/etc/hadoop
 ENV PATH=$HADOOP_HOME/bin:$PATH
 
 EXPOSE 50070 8020 9000
