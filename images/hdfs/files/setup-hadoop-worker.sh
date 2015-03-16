@@ -18,7 +18,7 @@ chmod go-wx /root/.ssh/authorized_keys
 
 #hadoop namenode -format
 #}
-sudo /etc/init.d/sshd start
+sudo /etc/init.d/ssh start
 $HADOOP_HOME/sbin/hadoop-daemon.sh --config $HADOOP_CONF_DIR --script hdfs start datanode
 
 while true; do sleep 1000; done
