@@ -1,6 +1,6 @@
 [Unit] 
 Description=hdfs worker service
-After=docker.service
+After=hdfs-master.service
 Before=spark-master.service
 Requires=docker.service
 
@@ -11,7 +11,7 @@ ExecStartPre=-/usr/bin/fleetctl list-machines| awk '{ if(NR>1)print $2; }' >> sl
 ExecStartPre=-/usr/bin/docker kill hdfs-worker
 ExecStartPre=-/usr/bin/docker rm hdfs-worker
 ExecStartPre=-/usr/bin/docker pull quadrature/hdfs
-ExecStart=/usr/bin/docker run -v /hdfs-data:/hdfs-data  --net host -p 50070:50070 -p 8020:8020 -p 9000:9000 --rm --name hdfs-worker quadrature/hdfs /root/hadoop-config/setup-hadoop-worker.sh
+ExecStart=/usr/bin/sh -c 'docker run -v /hdfs-data:/hdfs-data  --net host -p 50070:50070 -p 8020:8020 -p 9000:9000 -e MASTER=$(/usr/bin/etcdctl get /hdfs/master) --rm --name hdfs-worker quadrature/hdfs /root/hadoop-config/setup-hadoop-worker.sh'
 ExecStop=/usr/bin/docker stop hdfs-worker
 
 [X-Fleet]

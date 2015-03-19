@@ -14,7 +14,7 @@ chmod go-rwx /root/.ssh/id_rsa
 cp /root/hadoop-config/authorized_keys /root/.ssh/authorized_keys
 chmod go-wx /root/.ssh/authorized_keys
 
-#sed -i s/__MASTER__/${MASTER}/ /hdfs/hadoop/etc/hadoop/core-site.xml
+sed -i s/__MASTER__/${MASTER}/ /hdfs/hadoop/etc/hadoop/core-site.xml
 
 #hadoop namenode -format
 #}
