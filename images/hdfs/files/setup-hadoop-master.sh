@@ -18,7 +18,10 @@ chmod go-wx /root/.ssh/authorized_keys
 
 sed -i s/__MASTER__/${MASTER}/ /hdfs/hadoop/etc/hadoop/core-site.xml
 
+#if[! -d "/hdfs-data/curren"]
+#	then
 hadoop namenode -format
+#fi
 
 sudo /etc/init.d/ssh start
 

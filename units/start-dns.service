@@ -7,4 +7,4 @@ ExecStartPre=-/usr/bin/docker kill dns-server
 ExecStartPre=-/usr/bin/docker rm dns-server
 ExecStartPre=-/usr/bin/docker pull amplab/dnsmasq-precise
 ExecStartPre=-/usr/bin/etcdctl set /dns-server %H
-ExecStart=/usr/bin/docker run
+ExecStart=/usr/bin/docker run amplab/dnsmasq-precise

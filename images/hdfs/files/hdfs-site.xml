@@ -7,4 +7,8 @@
 	 <name>dfs.datanode.data.dir</name>
 	 <value>/hdfs-data</value>
      </property>
+     <property>
+	 <name>dfs.namenode.name.dir</name>
+	 <value>/hdfs-data</value>
+     </property>
 </configuration>
